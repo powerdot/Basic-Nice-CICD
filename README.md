@@ -19,7 +19,7 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Install: Nuxt
 - [ ] Install: NPM
 - [ ] Install: YARN
-- [ ] Download and launch this project (Nuxt SSR)
+- [ ] Download and launch this project
 - [ ] Set admin password
 
 ### Frontend
