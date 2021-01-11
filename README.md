@@ -1,5 +1,5 @@
 # Basic-Nice-CICD
-Easy app continuous deployment on your server with GitHub Webhook.
+Easy continuous deployment on your server for your apps with GitHub Webhook.
 
 ## Roadmap
 
