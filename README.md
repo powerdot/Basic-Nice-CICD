@@ -1,6 +1,14 @@
 # Basic-Nice-CICD
 Easy continuous deployment on your server for your apps with GitHub Webhook.
 
+## Objective
+Making deploying your own applications on your own server is easier using GitHub Webhook.  
+1. Install Easy Basic CICD on the server with one line of code;  
+2. Add your GitHub repository to the list of projects;  
+3. The project will be automatically updated on the server after the next Push to any of the selected branches, for example, master.  
+4. ... ?  
+5. PROFIT!  
+
 ## Roadmap
 
 ### Bash
