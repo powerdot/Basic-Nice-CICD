@@ -1,4 +1,4 @@
-# Basic-Nice-CICD
+![Basic Nice logo](https://github.com/powerdot/Basic-Nice-CICD/raw/main/about/GitHub-Logo.jpg)
 Easy continuous deployment on your server for your apps with GitHub Webhook.
 
 ## Objective
