@@ -1,4 +1,4 @@
-![Basic Nice logo](https://github.com/powerdot/Basic-Nice-CICD/raw/main/about/GitHub-Logo.jpg)
+![Basic Nice logo](https://github.com/powerdot/Basic-Nice-CICD/raw/main/about/GitHub-Logo@0.5x.jpg)
 
 ## Objective
 Making deploying your own applications on your own server is easier using GitHub Webhook.  
