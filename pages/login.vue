@@ -14,6 +14,8 @@
 </template>
 
 <script>
+let apiDriver = require("../components/apiDriver");
+
 export default {
   data(){
     return{
@@ -21,13 +23,25 @@ export default {
     }
   },
   methods: {
-    login(){
+    async login(){
       if(!this.password) return;
       console.log("login");
+      localStorage.bncicdpassword = this.password;
+      let settings = await apiDriver.settings.get();
+      if(settings){
+        this.$router.push("/dashboard");
+      }else{
+        localStorage.bncicdpassword = '';
+        this.$toast.error('Wrong password.')
+      }
     },
     keypress(e){
       if(e.keyCode === 13) return this.login();
     }
+  },
+  async mounted(){
+    let settings = await apiDriver.settings.get();
+    this.$router.push(settings?'/dashboard':'/login');
   }
 }
 </script>
