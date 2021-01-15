@@ -32,6 +32,16 @@ app.post('/pm2/restart', async (req,res,next)=>{
     return next();
 });
 
+app.post('/pm2/stop', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.pm2.process.stop( req.body.pname ) );
+    return next();
+});
+
+app.post('/pm2/start', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.pm2.process.start( req.body.script_path, req.body.pname ) );
+    return next();
+});
+
 // Settings
 
 app.get('/settings', (req,res,next)=>{

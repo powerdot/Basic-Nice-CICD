@@ -59,7 +59,7 @@ let pm2 = {
     _get: {
         connect: function(){
             return new Promise(function(resolve){
-                pm2Client.connect(function(err) {
+                pm2Client.connect((err)=>{
                     if (err) {
                         console.error("PM2:", e);
                         return resolve(false);
@@ -70,7 +70,7 @@ let pm2 = {
         },
         list: async function(){
             await this.connect();
-            return new Promise(function(resolve){
+            return new Promise((resolve)=>{
                 pm2Client.list((err, list) => {
                     if(err) {
                         console.error("PM2:", err)
@@ -82,8 +82,32 @@ let pm2 = {
         },
         restart: async function(pname){
             await this.connect();
-            return new Promise(function(resolve){
+            return new Promise((resolve)=>{
                 pm2Client.restart(pname,(err) => {
+                    if(err) {
+                        console.error("PM2:", err)
+                        return resolve(false)
+                    }
+                    resolve(true);
+                })
+            });
+        },
+        stop: async function(pname){
+            await this.connect();
+            return new Promise((resolve)=>{
+                pm2Client.stop(pname,(err) => {
+                    if(err) {
+                        console.error("PM2:", err)
+                        return resolve(false)
+                    }
+                    resolve(true);
+                })
+            });
+        },
+        start: async function(script_path, name){
+            await this.connect();
+            return new Promise((resolve)=>{
+                pm2Client.start({name: name, script: script_path}, (err) => {
                     if(err) {
                         console.error("PM2:", err)
                         return resolve(false)
@@ -99,6 +123,12 @@ let pm2 = {
         },
         restart: async function(pname){
             return await pm2._get.restart(pname);
+        },
+        stop: async function(pname){
+            return await pm2._get.stop(pname);
+        },
+        start: async function(script_path, name){
+            return await pm2._get.start(script_path, name);
         }
     }
 };

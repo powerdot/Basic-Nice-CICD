@@ -73,6 +73,12 @@ let e = {
         },
         restart: async(pname)=>{
             return await POST('pm2/restart', {pname});
+        },
+        stop: async(pname)=>{
+            return await POST('pm2/stop', {pname});
+        },
+        start: async(script_path, pname)=>{
+            return await POST('pm2/start', {script_path, pname});
         }
     }
 }
