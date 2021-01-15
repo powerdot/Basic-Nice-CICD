@@ -55,7 +55,6 @@ export default {
         for(let el of els) el.classList.remove('active');
         let active = document.querySelector('.main-navigation a[href="'+path+'"]');
         active.classList.add('active');
-        console.log(active, path)
     }
   },
   mounted(){
