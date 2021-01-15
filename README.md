@@ -56,3 +56,26 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Webhook catching from GitHub
 - [ ] Basic Nice CICD update fetching and installing
 - [ ] NGINX config edit methods and control
+
+
+## For Basic Nice developers
+
+To start develop this app you need:  
+  
+**Install PM2**
+```bash
+npm i pm2 -g
+```
+  
+**Install Nuxt**
+```bash
+npm i nuxt -g
+```  
+
+**Run Nuxt** right from project directory
+```bash
+npm run dev
+```
+  
+  
+Good luck!
