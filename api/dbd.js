@@ -15,21 +15,30 @@ let config = {
         return data;
     },
     project: {
-        list: ()=>config.read().projects,
-        add: function(id, _new){
-            let projects = this.list();
+        list: async ()=>{
+            let pm2_list = await pm2.process.list();
+            let projects = config.read().projects;
+            for(let project_id in projects){
+                let project = projects[project_id];
+                project.info = {};
+                project.info.pm2 = pm2_list.find(x=>x.name==project.pm2);
+            }
+            return projects;
+        },
+        add: async function(id, _new){
+            let projects = await this.list();
             projects[id] = _new;
             config.write('projects', projects);
             return true;
         },
-        update: function(id, values){
-            let projects = this.list();
+        update: async function(id, values){
+            let projects = await this.list();
             projects[id] = values;
             config.write('projects', projects);
             return projects[id];
         },
-        remove: function(id){
-            let projects = this.list();
+        remove: async function(id){
+            let projects = await this.list();
             delete projects[id];
             config.write('projects', projects);
             return projects;

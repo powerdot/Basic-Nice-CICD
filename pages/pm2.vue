@@ -11,10 +11,8 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-12 project" v-for="process of list" v-bind:key="process.pm_id">
-            {{process.pm_id}} {{process.name}} {{process.monit.cpu}}% {{(process.monit.memory / (1024*1024)).toFixed(2)}}MB
-            <button @click="restart(process.name)">Restart</button>
-            <button @click="stop(process.name)">Stop</button>
+        <div class="col-12">
+            <pm2Process v-for="process of list" v-bind:key="process.pm_id" :process="process"></pm2Process>
         </div>
     </div>
   </div>
@@ -22,9 +20,11 @@
 
 <script>
 let apiDriver = require("../components/apiDriver");
+import pm2Process from "../components/pm2Process"
 
 export default {
   layout: 'dashboard',
+  components: {pm2Process},
   data(){
     return {
       list: []
@@ -35,18 +35,6 @@ export default {
       let list = await apiDriver.pm2.list();
       console.log(list)
       this.list = list;
-    },
-    async restart(pname){
-        let restart = await apiDriver.pm2.restart(pname);
-        if(!restart) return this.$toast.error("Can't restart "+pname)
-        this.$toast.success("Process restarted!");
-        this.load();
-    },
-    async stop(pname){
-        let stop = await apiDriver.pm2.stop(pname);
-        if(!stop) return this.$toast.error("Can't stop "+pname)
-        this.$toast.success("Process stoped!");
-        this.load();
     }
   },
     mounted(){

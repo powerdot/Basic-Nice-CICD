@@ -15,8 +15,8 @@ app.use((req,res,next)=>{
 
 // Project
 
-app.get('/project/list', (req,res,next)=>{
-    req.wrapped = wrapper( dbd.config.project.list() );
+app.get('/project/list', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.config.project.list() );
     return next();
 });
 
