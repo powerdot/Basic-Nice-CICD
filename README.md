@@ -21,10 +21,9 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Install: NPM
 - [ ] Install: YARN
 - [ ] Download and launch this project
-- [ ] Set admin password
 
 ### Frontend
-- [ ] Basic login form
+- [x] Basic login form
 - [ ] First setup instructions: get server access to github by auto-generated RSA key.
 - [ ] Dashboard design
 - [ ] PM2 stats
@@ -43,8 +42,8 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Create admin interface: update password, edit webhook port, change secret deploy word
 
 ### Backend
-- [ ] Basic auth
-- [ ] Config storage managment (NoSQL or JSON-files)
+- [x] Basic auth
+- [x] Config storage managment (NoSQL or JSON-files)
 - [ ] Method module to run deployment for your Backend application
 - [ ] Method module to run deployment for your Static files
 - [ ] Method module to run deployment for your Vue-frontend
@@ -52,7 +51,7 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Method module to run deployment for your Nuxt static
 - [ ] Socket protocol to interact in real time with Frontend
 - [ ] Logs fetching from PM2 node
-- [ ] Stats fetching from PM2 node
+- [x] Stats fetching from PM2 node
 - [ ] Update methods for admin interface
 - [ ] Webhook catching from GitHub
 - [ ] Basic Nice CICD update fetching and installing
