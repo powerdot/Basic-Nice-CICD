@@ -61,6 +61,19 @@ let e = {
         get: async()=>{
             return await GET('settings');
         }
+    },
+    project: {
+        list: async()=>{
+            return await GET('project/list');
+        }
+    },
+    pm2: {
+        list: async()=>{
+            return await GET('pm2/list');
+        },
+        restart: async(pname)=>{
+            return await POST('pm2/restart', {pname});
+        }
     }
 }
 

@@ -13,10 +13,26 @@ app.use((req,res,next)=>{
     return res.status(403).send("Unauthorized");
 });
 
+// Project
+
 app.get('/project/list', (req,res,next)=>{
     req.wrapped = wrapper( dbd.config.project.list() );
     return next();
 });
+
+// PM2
+
+app.get('/pm2/list', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.pm2.process.list() );
+    return next();
+});
+
+app.post('/pm2/restart', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.pm2.process.restart( req.body.pname ) );
+    return next();
+});
+
+// Settings
 
 app.get('/settings', (req,res,next)=>{
     req.wrapped = wrapper( dbd.config.settings.get() );

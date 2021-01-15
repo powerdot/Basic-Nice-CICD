@@ -14,6 +14,7 @@ Making deploying your own applications on your own server is easier using GitHub
 
 ### Bash
 - [ ] One-line sh installer
+- [ ] Install: NGINX
 - [ ] Install: NodeJS
 - [ ] Install: PM2
 - [ ] Install: Nuxt
@@ -37,6 +38,7 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] App deployment pipeline interface
 - [ ] App PM2 logs
 - [ ] App PM2 managment
+- [ ] NGINX managment
 - [ ] Terminal connection
 - [ ] Create admin interface: update password, edit webhook port, change secret deploy word
 
@@ -54,3 +56,4 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Update methods for admin interface
 - [ ] Webhook catching from GitHub
 - [ ] Basic Nice CICD update fetching and installing
+- [ ] NGINX config edit methods and control

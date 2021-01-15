@@ -2,22 +2,18 @@
   <div class="container-fluid">
     <div class="row heading">
       <div class="col">
-        <h1>Dashboard</h1>
+        <h1>Projects</h1>
       </div>
     </div>
     <div class="row">
       <div class="col-3">
-        Your PM2 Stats
+        Project list:
       </div>
-      <div class="col-3">
-        Your NGINX routings
-      </div>
-      <div class="col-3">
-        Your Projects
-      </div>
-      <div class="col-3">
-        Your system stats
-      </div>
+    </div>
+    <div class="row">
+        <div class="col-12 project" v-for="(p,pid) of projects" v-bind:key="pid">
+            <h3>{{pid}}</h3>
+        </div>
     </div>
   </div>
 </template>
@@ -29,11 +25,16 @@ export default {
   layout: 'dashboard',
   data(){
     return {
-      
+      projects: {}
     }
   },
   methods: {
     
+  },
+  async mounted(){
+      let projects = await apiDriver.project.list();
+      console.log(projects)
+      this.projects = projects;
   }
 }
 </script>
