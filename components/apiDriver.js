@@ -80,6 +80,29 @@ let e = {
         start: async(script_path, pname)=>{
             return await POST('pm2/start', {script_path, pname});
         }
+    },
+    nginx: {
+        getParams: async()=>{
+            return await GET('nginx/params');
+        },
+        getConfig: async()=>{
+            return await GET('nginx/config');
+        },
+        status: async()=>{
+            return await GET('nginx/status');
+        },
+        writeConfg: async(content)=>{
+            return await POST('nginx/config', {content});
+        },
+        start: async()=>{
+            return await POST('nginx/start');
+        },
+        restart: async()=>{
+            return await POST('nginx/restart');
+        },
+        stop: async()=>{
+            return await POST('nginx/stop');
+        },
     }
 }
 

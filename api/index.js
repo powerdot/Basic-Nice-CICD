@@ -42,6 +42,43 @@ app.post('/pm2/start', async (req,res,next)=>{
     return next();
 });
 
+// NGINX
+
+app.post('/nginx/start', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.nginx._get.start() );
+    return next();
+});
+
+app.post('/nginx/stop', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.nginx._get.stop() );
+    return next();
+});
+
+app.post('/nginx/restart', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.nginx._get.restart() );
+    return next();
+});
+
+app.get('/nginx/params', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.nginx.getParams() );
+    return next();
+});
+
+app.get('/nginx/config', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.nginx.getConfig() );
+    return next();
+});
+
+app.post('/nginx/config', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.nginx.writeConfig( req.body.content ) );
+    return next();
+});
+
+app.get('/nginx/status', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.nginx.status() );
+    return next();
+});
+
 // Settings
 
 app.get('/settings', (req,res,next)=>{
@@ -50,5 +87,5 @@ app.get('/settings', (req,res,next)=>{
 });
 
 app.use((req,res)=>{
-    return res.status(req.wrapped.code).send(req.wrapped.done?req.wrapped.data:"error_ocured");
+    return res.status(req.wrapped.code).send(req.wrapped.done?req.wrapped.data:"error_occurred");
 });

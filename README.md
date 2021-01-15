@@ -74,8 +74,9 @@ npm i nuxt -g
 
 **Run Nuxt** right from project directory
 ```bash
-npm run dev
-```
+sudo npm run dev
+```  
+*You need root rights to allow backend work with nginx and system files.*  
   
   
 Good luck!

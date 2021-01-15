@@ -1,6 +1,8 @@
 let fs = require("fs");
 let path = require("path");
 const pm2Client = require("pm2");
+const { spawnSync, spawn, exec } = require('child_process');
+
 
 
 /* Configuration driver */
@@ -63,7 +65,7 @@ let config = {
 
 
 
-/*  */
+/* PM2 */
 let pm2 = {
     _get: {
         connect: function(){
@@ -145,28 +147,159 @@ let pm2 = {
 
 
 
-// pm2Client.connect(function(err) {
-//     if (err) {
-//         console.error("PM2:", e)
-//         process.exit(2);
-//     }
 
-//     pm2Client.restart("easyren", function(e){
-//         if(e) return console.error("PM2:", e)
-//     });
+/* NGINX */
+let nginx = {
+    _get: {
+        version: function(){
+            return new Promise(function(resolve){
+                exec("nginx -V 2>&1", (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(`error: ${error.message}`);
+                        return resolve(false);
+                    }
+                    if (stderr) {
+                        console.error(`stderr: ${stderr}`);
+                        return resolve(false);
+                    }
+                    return resolve(stdout);
+                });
+            });
+        },
+        parseParams: function(version_string){
+            if(!version_string) return false;
+            let p = version_string.split('--');
+            let params = {
+                version: p[0].replace('arguments: ', ''),
+                arguments: {}
+            }
+            for(let i=1; i<p.length; i++) params.arguments[p[i].split('=')[0].trim().replace('\\n','')] = (p[i].split('=')[1]||"").trim()||true ;
+            return params;
+        },
+        start: function(){
+            return new Promise(function(resolve){
+                exec("sudo nginx", (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(`error: ${error.message}`);
+                        return resolve(false);
+                    }
+                    if (stderr) {
+                        console.error(`stderr: ${stderr}`);
+                        return resolve(false);
+                    }
+                    return resolve(true);
+                });
+            });
+        },
+        restart: function(){
+            return new Promise(function(resolve){
+                exec("sudo nginx -s reload", (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(`error: ${error.message}`);
+                        return resolve(false);
+                    }
+                    if (stderr) {
+                        console.error(`stderr: ${stderr}`);
+                        return resolve(false);
+                    }
+                    return resolve(true);
+                });
+            });
+        },
+        stop: function(){
+            return new Promise(function(resolve){
+                exec("sudo nginx -s stop", (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(`error: ${error.message}`);
+                        return resolve(false);
+                    }
+                    if (stderr) {
+                        console.error(`stderr: ${stderr}`);
+                        return resolve(false);
+                    }
+                    return resolve(true);
+                });
+            });
+        },
+        processList: function(){
+            return new Promise(function(resolve){
+                exec("ps aux | grep nginx", (error, stdout, stderr) => {
+                    if (error) {
+                        console.error(`error: ${error.message}`);
+                        return resolve(false);
+                    }
+                    if (stderr) {
+                        console.error(`stderr: ${stderr}`);
+                        return resolve(false);
+                    }
+                    return resolve(stdout);
+                });
+            });
+        }
+    },
+    getParams: async function(){
+        let params = this._get.parseParams( await this._get.version() );
+        return params;
+    },
+    getConfigPath: async function(){
+        let params = this._get.parseParams( await this._get.version() );
+        return params.arguments['conf-path'];
+    },
+    getConfig: async function(){
+        let p = await this.getConfigPath();
+        let content = fs.readFileSync(p, {encoding: 'utf-8'});
+        return content;
+    },
+    writeConfig: async function(content){
+        let p = await this.getConfigPath();
+        fs.writeFileSync(p, content, {encoding: 'utf-8'});
+        return content;
+    },
+    status: async function(){
+        let list = await nginx._get.processList();
+        let status = {
+            active: false,
+            list: []
+        };
+        status.active = list.includes("root") && list.includes("nginx: master");
+        status.list = list.split('\n').filter(x=>!!x); // temp
+        return status;
+        let splitted = list.split('\n').filter(x=>!!x);
+        for(let l of splitted){
+            if(!l) continue;
+            let values = l.split(/\s\s+/g);
+            let columns = ['USER','PID','CPU','MEM','VSZ','RSS','TTY','STAT', 'STARTED','TIME','COMMAND']
+            let row = {};
+            for(let c_i in columns) row[columns[c_i]] = values[c_i];
+            status.list.push(row)
+        }
+        return status;
+    }
+};
 
-//     pm2Client.list((e, list) => {
-//         if(e) return console.error("PM2:", e)
-//         console.log('list:',list)
-//     })
-// });
+
+(async ()=>{
+    // let x = await nginx.getConfigPath();
+    // console.log("getConfigPath:", x);
+    // let x = await nginx._get.restart();
+    // console.log('output:', x);
+    // let x = await nginx.getConfig();
+    // console.log('output:', x);
+    // let x = await nginx._get.processList();
+    // console.log("output:", x);
+    let x = await nginx.status();
+    console.log("output:", x);
+})();
+
+
 
 
 
 
 let e = {
     config,
-    pm2
+    pm2,
+    nginx
 };
 
 module.exports = e;
