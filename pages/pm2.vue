@@ -7,7 +7,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <button @click="load">Update</button>
+            <button @click="load">Refresh</button>
         </div>
     </div>
     <div class="row">
