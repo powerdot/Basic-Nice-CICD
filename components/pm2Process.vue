@@ -1,8 +1,8 @@
 <template>
 	<div>
 		{{current.pm_id}} {{current.name}} {{current.monit.cpu}}% {{(current.monit.memory / (1024*1024)).toFixed(2)}}MB
-		<button @click="restart">Restart</button>
-		<button @click="stop">Stop</button>
+		<button @click="restart"><i class="bi bi-arrow-clockwise"></i></button>
+		<button @click="stop"><i class="bi bi-stop-circle"></i></button>
 	</div>
 </template>
 

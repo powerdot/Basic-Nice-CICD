@@ -6,7 +6,7 @@
                 Basic Nice
             </div>
             <div class="signout" @click="signout">
-                Exit
+                <i class="bi bi-box-arrow-right"></i>
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
