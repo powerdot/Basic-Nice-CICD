@@ -3,7 +3,9 @@ let path = require("path");
 const pm2Client = require("pm2");
 const { spawnSync, spawn, exec } = require('child_process');
 const readLastLines = require('read-last-lines');
+const { process } = require("babel-jest");
 
+const untildify = require('untildify');
 
 /* Configuration driver */
 
@@ -309,6 +311,32 @@ let nginx = {
 };
 
 
+
+
+/* SSH */
+let ssh = {
+    _get: {
+        listOfPublicKeys: function(){
+            let objects = fs.readdirSync( untildify("~/.ssh/") );
+            let rsa = objects.filter(x=>x.includes('.pub'));
+            return rsa;
+        },
+        readPublicKey: function(name){
+            if(!name.includes('.pub')) name += '.pub';
+            try {
+                let key = fs.readFileSync( untildify(`~/.ssh/${name}`), {encoding: 'utf-8'} );
+                return key;
+            } catch (error) {
+                return false;
+            }
+        }
+    }
+};
+
+
+
+
+
 (async ()=>{
     // let x = await nginx.getConfigPath();
     // console.log("getConfigPath:", x);
@@ -321,7 +349,8 @@ let nginx = {
     // let x = await nginx.status();
     // console.log("output:", x);
     // let x = await pm2._get.logs("easyren");
-    // console.log("output:", x);
+    // console.log("output:", x);=
+    // console.log(ssh._get.readPublicKey("id_rsa.pub"))
 })();
 
 
@@ -332,7 +361,8 @@ let nginx = {
 let e = {
     config,
     pm2,
-    nginx
+    nginx,
+    ssh
 };
 
 module.exports = e;

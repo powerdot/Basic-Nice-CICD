@@ -1,11 +1,25 @@
 const bodyParser = require('body-parser');
 const app = require('express')();
+var http = require('http');
+var httpServer = http.createServer(app);
 module.exports = { path: '/api', handler: app };
 let dbd = require('./dbd.js');
+var svnc = require('simplevnc');
 
 app.use(bodyParser.json());
 
 let wrapper = (data)=>({done: !!data, code: !!data?200:500, data});
+
+var server = new svnc.Server(httpServer);
+server.on('connect', function(client){
+  console.log('svnc client connected');
+})
+server.on('disconnect', function(client){
+  console.log('svnc client disconnected');
+})
+server.on('error', function(err){
+  console.error('svnc error', err)
+})
 
 // Auth
 app.use((req,res,next)=>{

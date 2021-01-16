@@ -25,6 +25,9 @@
                     <router-link class="nav-link" to="/github" @click.native="updateNav">GitHub</router-link>
                 </li>
                 <li class="nav-item">
+                    <router-link class="nav-link disabled" to="/vnc" @click.native="updateNav">Terminal</router-link>
+                </li>
+                <li class="nav-item">
                     <router-link class="nav-link" to="/settings" @click.native="updateNav">Settings</router-link>
                 </li>
             </ul>
