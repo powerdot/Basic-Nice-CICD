@@ -39,7 +39,7 @@ Making deploying your own applications on your own server is easier using GitHub
 - [x] App PM2 managment
 - [x] NGINX managment
 - [ ] Terminal connection
-- [ ] Create admin interface: update password, edit webhook port, change secret deploy word
+- [ ] Create admin interface: update password, edit webhook port, change secret deploy word, port management
 
 ### Backend
 - [x] Basic auth
@@ -56,6 +56,7 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Webhook catching from GitHub
 - [ ] Basic Nice CICD update fetching and installing
 - [ ] NGINX config edit methods and control
+- [ ] Port management methods
 
 
 ## For Basic Nice developers
