@@ -15,11 +15,11 @@ Making deploying your own applications on your own server is easier using GitHub
 ### Bash
 - [ ] One-line sh installer
 - [ ] Install: NGINX
+- [ ] Install: NPM
+- [ ] Install: YARN
 - [ ] Install: NodeJS
 - [ ] Install: PM2
 - [ ] Install: Nuxt
-- [ ] Install: NPM
-- [ ] Install: YARN
 - [ ] Download and launch this project
 
 ### Frontend
