@@ -1,9 +1,10 @@
-let fs = require("fs");
-let path = require("path");
+const fs = require("fs");
+const path = require("path");
 const pm2Client = require("pm2");
-const { spawnSync, spawn, exec } = require('child_process');
+const { exec } = require('child_process');
 const readLastLines = require('read-last-lines');
-const { process } = require("babel-jest");
+const randomWords = require('random-words');
+const crypto = require("crypto");
 
 const untildify = require('untildify');
 
@@ -324,12 +325,48 @@ let ssh = {
         readPublicKey: function(name){
             if(!name.includes('.pub')) name += '.pub';
             try {
-                let key = fs.readFileSync( untildify(`~/.ssh/${name}`), {encoding: 'utf-8'} );
-                return key;
+                let publicKey = fs.readFileSync( untildify(`~/.ssh/${name}`), {encoding: 'utf-8'} );
+                return {publicKey};
             } catch (error) {
                 return false;
             }
+        },
+        createKey: function(name, password){
+            return new Promise(function(resolve){
+                if(!name) name = randomWords({exactly: 2, join: '-'});
+                if(!password) password = crypto.randomBytes(64).toString('hex');
+                let key_location = untildify(`~/.ssh/${name}`);
+                let pub_key_location = untildify(`~/.ssh/${name}.pub`);
+                crypto.generateKeyPair('rsa', {
+                    modulusLength: 4096,
+                    publicKeyEncoding: {
+                      type: 'spki',
+                      format: 'pem'
+                    },
+                    privateKeyEncoding: {
+                      type: 'pkcs8',
+                      format: 'pem',
+                      cipher: 'aes-256-cbc',
+                      passphrase: 'top secret'
+                    }
+                  }, (err, publicKey, privateKey) => {
+                    // Handle errors and use the generated key pair.
+                    if(err) return resolve(false);
+                    fs.writeFileSync(key_location, privateKey, {encoding: 'utf-8'});
+                    fs.writeFileSync(pub_key_location, publicKey, {encoding: 'utf-8'});
+                    return resolve({publicKey});
+                  });
+            });
         }
+    },
+    keys: async function (){
+        return this._get.listOfPublicKeys();
+    },
+    readKey: async function(name){
+        return this._get.readPublicKey(name);
+    },
+    createKey: async function(name, password){
+        return await this._get.createKey(name, password);
     }
 };
 
@@ -351,6 +388,9 @@ let ssh = {
     // let x = await pm2._get.logs("easyren");
     // console.log("output:", x);=
     // console.log(ssh._get.readPublicKey("id_rsa.pub"))
+    // console.log( randomWords({exactly: 2, join: '-'}) )
+    // let x = await ssh.createKey('asdasdasd', '995564');
+    // console.log('key:', x);
 })();
 
 

@@ -17,6 +17,7 @@
     "monaco-editor-vue": "^1.0.10",
     "nuxt": "^2.14.6",
     "pm2": "^4.5.1",
+    "random-words": "^1.1.1",
     "read-last-lines": "^1.8.0",
     "simplevnc": "git+https://github.com/powerdot/simplevnc.git",
     "untildify": "^4.0.0"
