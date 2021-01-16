@@ -18,9 +18,9 @@
   </div>
 </template>
 
-<script>
-let apiDriver = require("../components/apiDriver");
-import pm2Process from "../components/pm2Process"
+<script> 
+let apiDriver = require("../../components/apiDriver");
+import pm2Process from "../../components/pm2Process"
 
 export default {
   layout: 'dashboard',

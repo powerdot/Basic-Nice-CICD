@@ -54,7 +54,7 @@ export default {
         let els = document.querySelectorAll('.main-navigation .nav-item a');
         for(let el of els) el.classList.remove('active');
         let active = document.querySelector('.main-navigation a[href="'+path+'"]');
-        active.classList.add('active');
+        if(active) active.classList.add('active');
     }
   },
   mounted(){

@@ -2,7 +2,7 @@ let fs = require("fs");
 let path = require("path");
 const pm2Client = require("pm2");
 const { spawnSync, spawn, exec } = require('child_process');
-
+const readLastLines = require('read-last-lines');
 
 
 /* Configuration driver */
@@ -126,6 +126,34 @@ let pm2 = {
                     resolve(true);
                 })
             });
+        },
+        logs: async function(name, lines=1000){
+            await this.connect();
+            return new Promise((resolve)=>{
+                pm2Client.describe(name, async (err, data) => {
+                    if(err) {
+                        console.error("PM2:", err)
+                        return resolve(false)
+                    }
+                    let process = data[0];
+                    if(!process) return resolve(false);
+                    let log_file_path = process.pm2_env.pm_out_log_path;
+                    let errlog_file_path = process.pm2_env.pm_err_log_path;
+                    let logs = await readLastLines.read(log_file_path, lines);
+                    let errlogs = await readLastLines.read(errlog_file_path, lines);
+                    resolve({
+                        err: {
+                            path: errlog_file_path,
+                            data: errlogs
+                        },
+                        out: {
+                            path: log_file_path,
+                            data: logs
+                        },
+                        lines
+                    });
+                })
+            });
         }
     },
     process: {
@@ -138,8 +166,11 @@ let pm2 = {
         stop: async function(pname){
             return await pm2._get.stop(pname);
         },
-        start: async function(script_path, name){
-            return await pm2._get.start(script_path, name);
+        start: async function(script_path, pname){
+            return await pm2._get.start(script_path, pname);
+        },
+        logs: async function(pname, lines){
+            return await pm2._get.logs(pname, lines);
         }
     }
 };
@@ -287,8 +318,10 @@ let nginx = {
     // console.log('output:', x);
     // let x = await nginx._get.processList();
     // console.log("output:", x);
-    let x = await nginx.status();
-    console.log("output:", x);
+    // let x = await nginx.status();
+    // console.log("output:", x);
+    // let x = await pm2._get.logs("easyren");
+    // console.log("output:", x);
 })();
 
 

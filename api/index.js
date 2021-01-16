@@ -42,6 +42,11 @@ app.post('/pm2/start', async (req,res,next)=>{
     return next();
 });
 
+app.get('/pm2/logs', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.pm2.process.logs(req.query.pname, req.query.lines) );
+    return next();
+});
+
 // NGINX
 
 app.post('/nginx/start', async (req,res,next)=>{

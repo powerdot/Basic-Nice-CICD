@@ -79,6 +79,9 @@ let e = {
         },
         start: async(script_path, pname)=>{
             return await POST('pm2/start', {script_path, pname});
+        },
+        logs: async(pname, lines=1000)=>{
+            return await GET('pm2/logs', {pname, lines});
         }
     },
     nginx: {
