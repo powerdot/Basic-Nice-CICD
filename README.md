@@ -26,8 +26,8 @@ Making deploying your own applications on your own server is easier using GitHub
 - [x] Basic login form
 - [ ] First setup instructions: get server access to github by auto-generated RSA key.
 - [ ] Dashboard design
-- [ ] PM2 stats
-- [ ] Add new App
+- [x] PM2 stats
+- [x] Add new App
 - [ ] New App instructions: how to connect with GitHub Webhook
 - [ ] Add App deployment type: Backend application
 - [ ] Add App deployment type: Static files
@@ -35,9 +35,9 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Add App deployment type: Nuxt SSR *with auto build on server side*
 - [ ] Add App deployment type: Nuxt static *with auto build on server side*
 - [ ] App deployment pipeline interface
-- [ ] App PM2 logs
-- [ ] App PM2 managment
-- [ ] NGINX managment
+- [x] App PM2 logs
+- [x] App PM2 managment
+- [x] NGINX managment
 - [ ] Terminal connection
 - [ ] Create admin interface: update password, edit webhook port, change secret deploy word
 
@@ -50,7 +50,7 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Method module to run deployment for your Nuxt SSR
 - [ ] Method module to run deployment for your Nuxt static
 - [ ] Socket protocol to interact in real time with Frontend
-- [ ] Logs fetching from PM2 node
+- [x] Logs fetching from PM2 node
 - [x] Stats fetching from PM2 node
 - [ ] Update methods for admin interface
 - [ ] Webhook catching from GitHub
