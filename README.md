@@ -39,7 +39,7 @@ Making deploying your own applications on your own server is easier using GitHub
 - [x] App PM2 managment
 - [x] NGINX managment
 - [ ] Terminal connection
-- [ ] Create admin interface: update password, edit webhook port, change secret deploy word, port management
+- [ ] Create admin interface: update password, edit WebHook port, change secret deploy word, port management
 
 ### Backend
 - [x] Basic auth
@@ -52,10 +52,10 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Socket protocol to interact in real time with Frontend
 - [x] Logs fetching from PM2 node
 - [x] Stats fetching from PM2 node
-- [ ] Update methods for admin interface
+- [ ] Methods to update service settings
 - [ ] Webhook catching from GitHub
 - [ ] Basic Nice CICD update fetching and installing
-- [ ] NGINX config edit methods and control
+- [x] NGINX config edit methods and control
 - [ ] Port management methods
 
 
