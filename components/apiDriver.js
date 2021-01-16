@@ -57,10 +57,15 @@ async function POST(r, params, clear=true) {
 }
 
 let e = {
-    settings: {
-        get: async()=>{
-            return await GET('settings');
-        }
+    config: {
+        settings: {
+            get: async()=>{
+                return await GET('config/settings');
+            },
+            updatePassword: async(old_password, new_password)=>{
+                return await POST('config/settings/updatePassword', {old_password, new_password});
+            }
+        },
     },
     project: {
         list: async()=>{
@@ -106,6 +111,17 @@ let e = {
         stop: async()=>{
             return await POST('nginx/stop');
         },
+    },
+    ssh: {
+        keys: async function (){
+            return await GET('ssh/keys');
+        },
+        readKey: async function(name){
+            return await GET('ssh/key', {name});
+        },
+        createKey: async function(name, password){
+            return await POST('ssh/key', {name, password});
+        }
     }
 }
 

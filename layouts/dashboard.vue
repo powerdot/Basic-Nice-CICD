@@ -10,25 +10,25 @@
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/dashboard" @click.native="updateNav">Dashboard</router-link>
+                    <NuxtLink class="nav-link" to="/dashboard" @click.native="updateNav('/dashboard')">Dashboard</NuxtLink>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/projects" @click.native="updateNav">Projects</router-link>
+                    <NuxtLink class="nav-link" to="/projects" @click.native="updateNav('/projects')">Projects</NuxtLink>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/pm2" @click.native="updateNav">PM2</router-link>
+                    <NuxtLink class="nav-link" to="/pm2" @click.native="updateNav('/pm2')">PM2</NuxtLink>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/nginx" @click.native="updateNav">NGINX</router-link>
+                    <NuxtLink class="nav-link" to="/nginx" @click.native="updateNav('/nginx')">NGINX</NuxtLink>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/github" @click.native="updateNav">GitHub</router-link>
+                    <NuxtLink class="nav-link" to="/github" @click.native="updateNav('/github')">GitHub</NuxtLink>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link disabled" to="/vnc" @click.native="updateNav">Terminal</router-link>
+                    <NuxtLink class="nav-link disabled" to="/vnc" @click.native="updateNav('/vnc')">Terminal</NuxtLink>
                 </li>
                 <li class="nav-item">
-                    <router-link class="nav-link" to="/settings" @click.native="updateNav">Settings</router-link>
+                    <NuxtLink class="nav-link" to="/settings" @click.native="updateNav('/settings')">Settings</NuxtLink>
                 </li>
             </ul>
           </div>
@@ -52,8 +52,9 @@ export default {
         localStorage.bncicdpassword = '';
         this.$router.push("/login");
     },
-    updateNav(){
-        let path = document.location.pathname;
+    updateNav(path){
+        if(!path) path = '/'+document.location.pathname.split('/')[1];
+        console.log('path', path)
         let els = document.querySelectorAll('.main-navigation .nav-item a');
         for(let el of els) el.classList.remove('active');
         let active = document.querySelector('.main-navigation a[href="'+path+'"]');

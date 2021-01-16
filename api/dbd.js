@@ -5,11 +5,12 @@ const { exec } = require('child_process');
 const readLastLines = require('read-last-lines');
 const randomWords = require('random-words');
 const crypto = require("crypto");
-
 const untildify = require('untildify');
 
-/* Configuration driver */
 
+
+
+/* Configuration */
 let config = {
     dir: path.join(__dirname, "../cicd.config.json"),
     read: ()=>JSON.parse(fs.readFileSync(config.dir, {encoding: 'utf-8'})),
@@ -50,7 +51,11 @@ let config = {
         }
     },
     settings: {
-        get: ()=>config.read().system,
+        get: (without_password)=>{
+            let c = config.read().settings
+            if(without_password) c.password = "x".repeat(c.password.length);
+            return c;
+        },
         update: function(values){
             config.write('settings', values);
             return values;
@@ -59,9 +64,16 @@ let config = {
             let settings = this.get();
             settings[key] = value;
             config.write('settings', settings);
+            console.log(settings)
             return settings;
         },
         getPassword: ()=>config.settings.get().password,
+        updatePassword: (old_password, new_password)=>{
+            let current_password = config.settings.getPassword();
+            if(old_password != current_password) return false;
+            config.settings.updateOne('password', new_password);
+            return true;
+        }
     }
 };
 

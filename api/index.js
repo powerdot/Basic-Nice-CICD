@@ -98,10 +98,34 @@ app.get('/nginx/status', async (req,res,next)=>{
     return next();
 });
 
+// SSH
+
+
+
+app.get('/ssh/keys', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.ssh.keys() );
+    return next();
+});
+
+app.get('/ssh/key', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.ssh.readKey(req.query.name) );
+    return next();
+});
+
+app.post('/ssh/key', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.ssh.createKey( req.body.name, req.body.password ) );
+    return next();
+});
+
 // Settings
 
-app.get('/settings', (req,res,next)=>{
-    req.wrapped = wrapper( dbd.config.settings.get() );
+app.get('/config/settings', (req,res,next)=>{
+    req.wrapped = wrapper( dbd.config.settings.get(true) );
+    return next();
+});
+
+app.post('/config/settings/updatePassword', (req,res,next)=>{
+    req.wrapped = wrapper( dbd.config.settings.updatePassword( req.body.old_password, req.body.new_password ) );
     return next();
 });
 

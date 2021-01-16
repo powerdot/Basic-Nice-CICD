@@ -4,6 +4,7 @@
 		<button @click="start" :disabled="current.monit.memory!=0"><i class="bi bi-play-fill"></i></button>
 		<button @click="restart" :disabled="current.monit.memory==0"><i class="bi bi-arrow-clockwise"></i></button>
 		<button @click="stop" :disabled="current.monit.memory==0"><i class="bi bi-stop-circle"></i></button>
+		<button @click="openLogs">Logs</button>
 	</div>
 </template>
 
@@ -63,6 +64,9 @@ export default {
 	},
 	async start(){
 		this.restart();
+	},
+	openLogs(){
+		this.$router.push(`/pm2/${this.current.pm_id}`);
 	}
   },
 	mounted(){
