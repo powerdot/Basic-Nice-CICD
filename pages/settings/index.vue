@@ -15,11 +15,11 @@
           And new password: <input type="password" v-model="password.new_password">
           <button @click="updatePassword">Update password</button>
           <hr>
-          Projects directory: <input type="text" v-model="settings.projects_folder">
+          Projects directory: <input type="text" disabled v-model="settings.projects_folder">
+          <button disabled>Update</button>
           <hr>
-          Service port: <input type="text" v-model="settings.port">
-          <hr>
-          Github webhook port: <input type="text" v-model="settings.webhook_port">
+          Service port: <input type="text" disabled v-model="settings.port">
+          <button disabled>Update</button>
       </div>
     </div>
     <div class="row">
@@ -34,7 +34,10 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12"><h2>Ports</h2></div>
+      <div class="col-12"><h2>Machine ports</h2></div>
+      <div class="col-12">
+        Data unavailable.
+      </div>
     </div>
   </div>
 </template>
@@ -54,7 +57,6 @@ export default {
         settings: {
             password: "",
             port: "",
-            webhook_port: "",
             projects_folder: ""
         },
         rsa_keys: [],
@@ -64,12 +66,9 @@ export default {
   methods: {
     async load(){
         let settings = await apiDriver.config.settings.get();
-        console.log(settings);
         this.settings = settings;
-
         let rsa_keys = await apiDriver.ssh.keys();
         this.rsa_keys = rsa_keys;
-
         this.loaded = true;
     },
     async updatePassword(){
