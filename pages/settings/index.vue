@@ -29,7 +29,7 @@
       </div>
       <div class="col">
           <div class='rsa_key' v-for="k of rsa_keys" v-bind:key="k">
-              {{k}}
+              <button @click="removeKeys(k)"><i class="bi bi-x"></i></button> {{k}}
           </div>
       </div>
     </div>
@@ -86,6 +86,15 @@ export default {
     },
     newRSA(){
       this.$router.push('/settings/new_rsa');
+    },
+    async removeKeys(name){
+      let a = await apiDriver.ssh.removeKeys(name);
+        if(!a){
+            this.$toast.error('Cant remove the key')
+            return;
+        }
+        this.$toast.success('Key removed!');
+        this.load();
     }
   },
   async mounted(){

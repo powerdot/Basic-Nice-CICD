@@ -121,6 +121,9 @@ let e = {
         },
         createKey: async function(name, password){
             return await POST('ssh/key', {name, password});
+        },
+        removeKeys: async function(name){
+            return await POST('ssh/removeKeys', {name});
         }
     }
 }

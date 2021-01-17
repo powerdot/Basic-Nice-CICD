@@ -100,8 +100,6 @@ app.get('/nginx/status', async (req,res,next)=>{
 
 // SSH
 
-
-
 app.get('/ssh/keys', async (req,res,next)=>{
     req.wrapped = wrapper( await dbd.ssh.keys() );
     return next();
@@ -114,6 +112,11 @@ app.get('/ssh/key', async (req,res,next)=>{
 
 app.post('/ssh/key', async (req,res,next)=>{
     req.wrapped = wrapper( await dbd.ssh.createKey( req.body.name, req.body.password ) );
+    return next();
+});
+
+app.post('/ssh/removeKeys', async (req,res,next)=>{
+    req.wrapped = wrapper( await dbd.ssh.removeKeys( req.body.name ) );
     return next();
 });
 

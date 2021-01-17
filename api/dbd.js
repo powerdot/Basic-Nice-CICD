@@ -369,6 +369,15 @@ let ssh = {
                     return resolve({publicKey});
                   });
             });
+        },
+        removeKeys: function(name){
+            let privateKey = name.replace(".pub", '');
+            let publicKey = name.includes('.pub')?name:`${name}.pub`;
+            let privateKeyPath = untildify(`~/.ssh/${privateKey}`);
+            let publicKeyPath = untildify(`~/.ssh/${publicKey}`);
+            if(fs.existsSync(privateKeyPath)) fs.unlinkSync(privateKeyPath);
+            if(fs.existsSync(publicKeyPath)) fs.unlinkSync(publicKeyPath);
+            return true;
         }
     },
     keys: async function (){
@@ -379,6 +388,9 @@ let ssh = {
     },
     createKey: async function(name, password){
         return await this._get.createKey(name, password);
+    },
+    removeKeys: function(name){
+        return this._get.removeKeys(name);
     }
 };
 
