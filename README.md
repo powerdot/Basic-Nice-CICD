@@ -4,7 +4,7 @@
 
 ## Objective
 Making deploying your own applications on your own server is easier using GitHub Webhook.  
-1. Install Easy Basic CICD on the server with one line of code;  
+1. Install Basic Nice CICD on the server with one line of code;  
 2. Add your GitHub repository to the list of projects;  
 3. The project will be automatically updated on the server after the next Push to any of the selected branches, for example, master.  
 4. ... ?  
@@ -25,7 +25,7 @@ Making deploying your own applications on your own server is easier using GitHub
 ### Frontend
 - [x] Basic login form
 - [ ] First setup instructions: get server access to github by auto-generated RSA key.
-- [ ] Dashboard design
+- [ ] Dashboard
 - [x] PM2 stats
 - [x] Add new App
 - [ ] New App instructions: how to connect with GitHub Webhook
@@ -39,7 +39,7 @@ Making deploying your own applications on your own server is easier using GitHub
 - [x] App PM2 managment
 - [x] NGINX managment
 - [ ] Terminal connection
-- [ ] Create admin interface: update password, edit WebHook port, change secret deploy word, port management
+- [x] Create admin interface: update password, edit WebHook port, change secret deploy word, port management
 
 ### Backend
 - [x] Basic auth
@@ -52,7 +52,8 @@ Making deploying your own applications on your own server is easier using GitHub
 - [ ] Socket protocol to interact in real time with Frontend
 - [x] Logs fetching from PM2 node
 - [x] Stats fetching from PM2 node
-- [ ] Methods to update service settings
+- [x] Methods to update service settings
+- [x] RSA keys: generate and remove methods
 - [ ] Webhook catching from GitHub
 - [ ] Basic Nice CICD update fetching and installing
 - [x] NGINX config edit methods and control
