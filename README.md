@@ -44,6 +44,8 @@ Making deploying your own applications on your own server is easier using GitHub
 ### Backend
 - [x] Basic auth
 - [x] Config storage managment (NoSQL or JSON-files)
+- [ ] Webhook catching from GitHub
+- [ ] Port management methods
 - [ ] Method module to run deployment for your Backend application
 - [ ] Method module to run deployment for your Static files
 - [ ] Method module to run deployment for your Vue-frontend
@@ -54,10 +56,8 @@ Making deploying your own applications on your own server is easier using GitHub
 - [x] Stats fetching from PM2 node
 - [x] Methods to update service settings
 - [x] RSA keys: generate and remove methods
-- [ ] Webhook catching from GitHub
-- [ ] Basic Nice CICD update fetching and installing
 - [x] NGINX config edit methods and control
-- [ ] Port management methods
+- [ ] Basic Nice CICD update fetching and installing
 
 
 ## For Basic Nice developers
