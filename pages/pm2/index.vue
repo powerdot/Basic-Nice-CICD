@@ -2,12 +2,12 @@
   <div class="container-fluid">
     <div class="row heading">
       <div class="col">
-        <h1>Processes</h1>
+        <h1>{{ $t('Processes') }}</h1>
       </div>
     </div>
     <div class="row">
         <div class="col">
-            <button @click="load">Refresh</button>
+            <button @click="load">{{ $t('Refresh') }}</button>
         </div>
     </div>
     <div class="row">

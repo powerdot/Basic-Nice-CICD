@@ -2,30 +2,30 @@
   <div class="container-fluid">
     <div class="row heading">
       <div class="col">
-        <h1>Settings</h1>
+        <h1>{{$t('Settings')}}</h1>
       </div>
     </div>
     <div class="row">
-      <div class="col-12"><h2>System</h2></div>
+      <div class="col-12"><h2>{{$t('System')}}</h2></div>
       <div class="col">
-          Password: <input type="password" v-model="settings.password">
+          {{$t('Password')}}: <input type="password" v-model="settings.password">
           <br>
-          To update your password, Enter current password: <input type="password" v-model="password.old_password">
+          {{$t('_settings.To_update_password_enter_current')}}: <input type="password" v-model="password.old_password">
           <br>
-          And new password: <input type="password" v-model="password.new_password">
-          <button @click="updatePassword">Update password</button>
+          {{$t('_settings.And_new_password')}}: <input type="password" v-model="password.new_password">
+          <button @click="updatePassword">{{$t('_settings.Update_password')}}</button>
           <hr>
-          Projects directory: <input type="text" disabled v-model="settings.projects_folder">
-          <button disabled>Update</button>
+          {{$t('_settings.Projects_dir')}}: <input type="text" disabled v-model="settings.projects_folder">
+          <button disabled>{{$t('Update')}}</button>
           <hr>
-          Service port: <input type="text" disabled v-model="settings.port">
-          <button disabled>Update</button>
+          {{$t('_settings.Service_port')}}: <input type="text" disabled v-model="settings.port">
+          <button disabled>{{$t('Update')}}</button>
       </div>
     </div>
     <div class="row">
-      <div class="col-12"><h2>RSA Keys</h2></div>
+      <div class="col-12"><h2>{{$t('RSA_Keys')}}</h2></div>
       <div class="col-12">
-        <button @click="newRSA">Create new</button>
+        <button @click="newRSA">{{$t('Create_new')}}</button>
       </div>
       <div class="col">
           <div class='rsa_key' v-for="k of rsa_keys" v-bind:key="k">
@@ -34,9 +34,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12"><h2>Machine ports</h2></div>
+      <div class="col-12"><h2>{{$t('_settings.Machine_ports')}}</h2></div>
       <div class="col-12">
-        Data unavailable.
+        {{$t('Data_unavailable')}}.
       </div>
     </div>
   </div>

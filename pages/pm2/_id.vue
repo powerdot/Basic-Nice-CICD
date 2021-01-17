@@ -2,7 +2,7 @@
   <div class="container-fluid" v-if='pm_id!=-1'>
     <div class="row heading">
       <div class="col">
-        <h1>PM2 Logs</h1>
+        <h1>{{$t('PM2_Logs')}}</h1>
       </div>
     </div>
     <div class="row">
@@ -12,12 +12,12 @@
     </div>
     <div class="row">
       <div class="col">
-        <h2>Logs</h2>
+        <h2>{{$t('Logs')}}</h2>
         <div class="path">{{logs.out.path}}</div>
         <div class="logs">{{logs.out.data}}</div>
       </div>
       <div class="col">
-        <h2>Errors</h2>
+        <h2>{{$t('Errors')}}</h2>
         <div class="path">{{logs.err.path}}</div>
         <div class="logs">{{logs.err.data}}</div>
       </div>

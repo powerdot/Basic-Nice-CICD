@@ -1,10 +1,11 @@
 <template>
 	<div v-if='loaded'>
 		{{current.pm_id}} {{current.name}} {{current.monit.cpu}}% {{(current.monit.memory / (1024*1024)).toFixed(2)}}MB
+		<span :class="{badge: true, 'badge-secondary':current.pm2_env.status==='stopped', 'badge-danger':current.pm2_env.status==='errored', 'badge-success':current.pm2_env.status==='online'}">{{$t(current.pm2_env.status)}}</span>
 		<button @click="start" :disabled="current.monit.memory!=0"><i class="bi bi-play-fill"></i></button>
 		<button @click="restart" :disabled="current.monit.memory==0"><i class="bi bi-arrow-clockwise"></i></button>
 		<button @click="stop" :disabled="current.monit.memory==0"><i class="bi bi-stop-circle"></i></button>
-		<button @click="openLogs">Logs</button>
+		<button @click="openLogs">{{$t('Logs')}}</button>
 	</div>
 </template>
 
@@ -52,14 +53,14 @@ export default {
 	},
 	async restart(){
 		let restart = await apiDriver.pm2.restart(this.current.name);
-		if(!restart) return this.$toast.error("Can't restart "+this.current.name)
-		this.$toast.success("Process restarted!");
+		if(!restart) return this.$toast.error(this.$t("Cant_restart")+" "+this.current.name)
+		this.$toast.success( this.$t("Process_restarted") );
 		this.update();
 	},
 	async stop(){
 		let stop = await apiDriver.pm2.stop(this.current.name);
-		if(!stop) return this.$toast.error("Can't stop "+this.current.name)
-		this.$toast.success("Process stoped!");
+		if(!stop) return this.$toast.error(this.$t("Cant_stop")+" "+this.current.name)
+		this.$toast.success( this.$t("Process_stopped") );
 		this.update();
 	},
 	async start(){

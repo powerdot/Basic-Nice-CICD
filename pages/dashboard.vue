@@ -2,21 +2,21 @@
   <div class="container-fluid">
     <div class="row heading">
       <div class="col">
-        <h1>Dashboard</h1>
+        <h1>{{$t('Dashboard')}}</h1>
       </div>
     </div>
     <div class="row">
       <div class="col-3">
-        Your PM2 Stats
+        {{ $t("_dashboard.Your_PM2_Stats") }}
       </div>
       <div class="col-3">
-        Your NGINX routings
+        {{ $t("_dashboard.Your_NGINX_routings") }}
       </div>
       <div class="col-3">
-        Your Projects
+        {{ $t("_dashboard.Your_Projects") }}
       </div>
       <div class="col-3">
-        Your system stats
+        {{ $t("_dashboard.Your_System_Stats") }}
       </div>
     </div>
   </div>

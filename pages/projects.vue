@@ -2,12 +2,12 @@
   <div class="container-fluid">
     <div class="row heading">
       <div class="col">
-        <h1>Projects</h1>
+        <h1>{{$t('Projects')}}</h1>
       </div>
     </div>
     <div class="row">
       <div class="col-3">
-        Project list:
+        {{$t('Project_list')}}:
       </div>
     </div>
     <div class="row">

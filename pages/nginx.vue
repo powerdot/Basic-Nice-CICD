@@ -4,19 +4,19 @@
       <div class="col">
         <h1>
             NGINX
-            <span class="badge badge-success" v-if='status.active'>Working</span>
-            <span class="badge badge-secondary" v-if='!status.active'>Stopped</span>
+            <span class="badge badge-success" v-if='status.active'>{{$t('Working')}}</span>
+            <span class="badge badge-secondary" v-if='!status.active'>{{$t('Stopped')}}</span>
         </h1>
       </div>
     </div>
     <div class="row mb-2">
         <div class="col">
-            <button class="btn btn-success" @click="save" :disabled='!changed'><i class="bi bi-cloud-arrow-up"></i> Save</button>
+            <button class="btn btn-success" @click="save" :disabled='!changed'><i class="bi bi-cloud-arrow-up"></i> {{$t('Save')}}</button>
         </div>
         <div class="col text-right">
-            <button :disabled='status.active' class="btn btn-success" @click="start"><i class="bi bi-play-fill"></i> Start</button>
-            <button :disabled='!status.active' class="btn btn-warning" @click="restart"><i class="bi bi-arrow-repeat"></i> Restart</button>
-            <button :disabled='!status.active' class="btn btn-danger" @click="stop"><i class="bi bi-stop-fill"></i> Stop</button>
+            <button :disabled='status.active' class="btn btn-success" @click="start"><i class="bi bi-play-fill"></i> {{$t('Start')}}</button>
+            <button :disabled='!status.active' class="btn btn-warning" @click="restart"><i class="bi bi-arrow-repeat"></i> {{$t('Restart')}}</button>
+            <button :disabled='!status.active' class="btn btn-danger" @click="stop"><i class="bi bi-stop-fill"></i> {{$t('Stop')}}</button>
         </div>
     </div>
     <div class='row'>
@@ -99,6 +99,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
+h1 .badge{
+  font-size: 11pt;
+  position: relative;
+  top: -14px;
+}
 
 </style>

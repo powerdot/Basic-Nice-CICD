@@ -38,6 +38,7 @@ Making deploying your own applications on your own server is easier using GitHub
 - [x] App PM2 logs
 - [x] App PM2 managment
 - [x] NGINX managment
+- [x] Connect Interface Internationalization (i18n)
 - [ ] Terminal connection
 - [ ] Create admin interface: update password, edit WebHook port, change secret deploy word, port management
 

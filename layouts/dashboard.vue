@@ -10,10 +10,10 @@
             </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <NuxtLink class="nav-link" to="/dashboard" @click.native="updateNav('/dashboard')">Dashboard</NuxtLink>
+                    <NuxtLink class="nav-link" to="/dashboard" @click.native="updateNav('/dashboard')">{{ $t('Dashboard') }}</NuxtLink>
                 </li>
                 <li class="nav-item">
-                    <NuxtLink class="nav-link" to="/projects" @click.native="updateNav('/projects')">Projects</NuxtLink>
+                    <NuxtLink class="nav-link" to="/projects" @click.native="updateNav('/projects')">{{ $t('Projects') }}</NuxtLink>
                 </li>
                 <li class="nav-item">
                     <NuxtLink class="nav-link" to="/pm2" @click.native="updateNav('/pm2')">PM2</NuxtLink>
@@ -25,12 +25,15 @@
                     <NuxtLink class="nav-link" to="/github" @click.native="updateNav('/github')">GitHub</NuxtLink>
                 </li>
                 <li class="nav-item">
-                    <NuxtLink class="nav-link disabled" to="/vnc" @click.native="updateNav('/vnc')">Terminal</NuxtLink>
+                    <NuxtLink class="nav-link disabled" to="/vnc" @click.native="updateNav('/vnc')">{{ $t('Terminal') }}</NuxtLink>
                 </li>
                 <li class="nav-item">
-                    <NuxtLink class="nav-link" to="/settings" @click.native="updateNav('/settings')">Settings</NuxtLink>
+                    <NuxtLink class="nav-link" to="/settings" @click.native="updateNav('/settings')">{{ $t('Settings') }}</NuxtLink>
                 </li>
             </ul>
+            <div class="langs">
+                <button v-for="locale in availableLocales" :key="locale" @click="switchLanguage(locale)">{{ locale }}</button>
+            </div>
           </div>
           <div class="dashboard">
               <Nuxt />
@@ -42,6 +45,11 @@
 <script>
 export default {
   layout: 'dashboard',
+  computed: {
+    availableLocales () {
+        return this.$i18n.availableLocales;
+    }
+    },
   data(){
     return {
       
@@ -59,6 +67,12 @@ export default {
         for(let el of els) el.classList.remove('active');
         let active = document.querySelector('.main-navigation a[href="'+path+'"]');
         if(active) active.classList.add('active');
+    },
+    switchLanguage(locale){
+        this.$cookies.set("locale", locale, {
+            path: "/"
+        });
+        window.location.reload(true);
     }
   },
   mounted(){
