@@ -27,7 +27,7 @@ export default {
       if(!this.password) return;
       console.log("login");
       localStorage.bncicdpassword = this.password;
-      let settings = await apiDriver.settings.get();
+      let settings = await apiDriver.config.settings.get();
       if(settings){
         this.$router.push("/dashboard");
       }else{
@@ -40,7 +40,7 @@ export default {
     }
   },
   async mounted(){
-    let settings = await apiDriver.settings.get();
+    let settings = await apiDriver.config.settings.get();
     this.$router.push(settings?'/dashboard':'/login');
   }
 }
